@@ -200,6 +200,12 @@ class NewRelicPluginAgent(clihelper.Controller):
                 self.poll_plugin(plugin, apache_httpd.ApacheHTTPD,
                                  self.application_config.get(plugin))
 
+            if plugin == 'cloudant':
+                if 'cloudant' not in globals():
+                    from newrelic_plugin_agent.plugins import cloudant
+                self.poll_plugin(plugin, cloudant.Cloudant,
+                                 self.application_config.get(plugin))
+
             if plugin == 'couchdb':
                 if 'couchdb' not in globals():
                     from newrelic_plugin_agent.plugins import couchdb
